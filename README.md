@@ -68,7 +68,6 @@ We welcome contributions! Whether it's adding new games, fixing bugs, or improvi
 8. Open a **Pull Request** (PR) on the main repository with a clear description of your changes.
    
 
-Now you're all set to make contributions!
 
 ---
 
