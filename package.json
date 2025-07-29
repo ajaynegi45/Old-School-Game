@@ -11,13 +11,13 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "next": "14.2.8",
+    "concurrently": "^8.2.2",
+    "next": "^14.2.30",
     "react": "^18",
     "react-copy-to-clipboard": "^5.1.0",
     "react-dom": "^18",
     "socket.io": "^4.7.5",
-    "socket.io-client": "^4.7.5",
-    "concurrently": "^8.2.2"
+    "socket.io-client": "^4.7.5"
   },
   "devDependencies": {
     "@types/node": "^20",

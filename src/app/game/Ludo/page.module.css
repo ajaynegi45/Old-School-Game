@@ -1,0 +1,43 @@
+/* page.module.css */
+
+.container {
+  min-height: 100vh;
+  background-color: white;
+  color: black;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.heading {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.panel {
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.dice {
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.board {
+  margin: 2rem 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pieceGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+  gap: 1rem;
+  width: 100%;
+  max-width: 600px;
+}

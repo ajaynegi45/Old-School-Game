@@ -3,6 +3,7 @@ import styles from "./page.module.css";
 import Card from "@/components/Card";
 import TicTacToeImage from "/public/tic-tac-toe.svg";
 import SudokuImage from "/public/SudokuLogo.webp";
+import LudoImage from "/public/Ludo.jpeg";
 
 
 
@@ -19,6 +20,7 @@ const SelectGame = () => {
             <div className={styles.cardContainer}>
                 <Card image={TicTacToeImage} name={"Tic Tac Toe"} link={"tic-tac-toe/single-player"} backgroundColor={"#FF3737"} textColor={"white"}/>
                 <Card image={SudokuImage} name={"sudoku"} link={"sudoku"} backgroundColor={"#22C55E"} />
+                <Card image={LudoImage} name={"Ludo"} link={"ludo"} backgroundColor={"#FBBF24"}/>
             </div>
         </>
     );
