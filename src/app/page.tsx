@@ -33,7 +33,7 @@ export default function Home() {
                     <Image src={TicTacToeImage} alt={"tic-tac-toe.svg"} width={"100"} height={"88"} loading={"eager"} priority={true} />
                 </div>
                 <h1>Unlock Your Mind&apos;s Potential</h1>
-                <p>Train Smarter, Not Harder!</p>
+                <p>Classic Games Collection - Train Smarter, Not Harder!</p>
 
                 <div className={styles.urlConatiner}>
                     <div className={styles.tictactoeUrlConatiner}>
