@@ -1,0 +1,84 @@
+.installButton {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background: linear-gradient(135deg, #4CAF50, #45a049);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(76, 175, 80, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.installButton:hover {
+  background: linear-gradient(135deg, #45a049, #3d8b40);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(76, 175, 80, 0.4);
+}
+
+.installButton:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 6px rgba(76, 175, 80, 0.3);
+}
+
+.installButton svg {
+  flex-shrink: 0;
+  transition: transform 0.3s ease;
+}
+
+.installButton:hover svg {
+  transform: translateY(2px);
+}
+
+.installButton span {
+  white-space: nowrap;
+}
+
+/* Mobile styles */
+@media (max-width: 768px) {
+  .installButton {
+    padding: 8px 12px;
+    font-size: 13px;
+    border-radius: 6px;
+  }
+  
+  .installButton span {
+    display: none;
+  }
+}
+
+/* For navbar integration */
+.installButton.navbar {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.installButton.navbar:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Pulse animation for attention */
+@keyframes pulse {
+  0% {
+    box-shadow: 0 2px 8px rgba(76, 175, 80, 0.3);
+  }
+  50% {
+    box-shadow: 0 2px 8px rgba(76, 175, 80, 0.6), 0 0 0 8px rgba(76, 175, 80, 0.1);
+  }
+  100% {
+    box-shadow: 0 2px 8px rgba(76, 175, 80, 0.3);
+  }
+}
+
+.installButton.pulse {
+  animation: pulse 2s infinite;
+}

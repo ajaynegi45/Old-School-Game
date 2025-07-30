@@ -60,6 +60,27 @@
     text-decoration: none;
 }
 
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.pwa-install {
+    background: rgba(76, 175, 80, 0.1) !important;
+    border: 1px solid rgba(76, 175, 80, 0.3) !important;
+    color: #4CAF50 !important;
+    font-size: 12px !important;
+    padding: 6px 12px !important;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.pwa-install:hover {
+    background: rgba(76, 175, 80, 0.2) !important;
+    color: #45a049 !important;
+}
+
 /* Hover Effects */
 .title:hover, .link:hover {
     cursor: pointer;
@@ -70,7 +91,22 @@
 
 /* Mobile */
 @media (max-width: 700px) {
-
+    .nav-actions {
+        gap: 0.5rem;
+    }
+    
+    .link {
+        font-size: 12px;
+    }
+    
+    .title {
+        font-size: 12px;
+    }
+    
+    .pwa-install {
+        padding: 4px 8px !important;
+        font-size: 11px !important;
+    }
 }
 
 /* Tablet and Smaller Desktop */
