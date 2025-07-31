@@ -43,7 +43,7 @@ export default function Footer() {
                     <div className={styles["footer-right-link-container"]} >
                         <p>Contribution</p>
                         <Link href={"https://github.com/ajaynegi45/Old-School-Game/issues"}>Issues</Link>
-                        <Link href={"https://github.com/ajaynegi45/Old-School-Game/blob/main/README.md"}>About us</Link>
+                        <Link href={"/aboutUs"}>About us</Link>
                         <Link href={"https://github.com/ajaynegi45/Old-School-Game"}>Contribution</Link>
                     </div>
                 </div>

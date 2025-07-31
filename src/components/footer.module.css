@@ -155,9 +155,6 @@
     width: max-content;
     position: relative;
 }
-.footer-right-link-container:hover  a {
-    color: var(--line-grey);
-}
 
 .footer-right-link-container > a::after {
     content: "";
