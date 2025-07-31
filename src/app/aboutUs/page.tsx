@@ -11,8 +11,8 @@ export default function AboutUs() {
             </div>
 
             <div className={styles.heroSection}>
-                <h1 className={styles.tittle}>Old School Game</h1>
-                <h2 className={styles.tittle}>Boost Your Brain with Classic Fun!</h2>
+                <h1 className={styles.title}>Old School Game</h1>
+                <h2 className={styles.title}>Boost Your Brain with Classic Fun!</h2>
 
                 <div className={styles.divContainer}>
                     <h2>✍️ What is OldSchoolGame?</h2>
