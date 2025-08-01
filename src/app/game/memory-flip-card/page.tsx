@@ -10,9 +10,43 @@ interface Card {
   isMatched: boolean;
 }
 
-const CARD_SYMBOLS = ['🎮', '🎯', '🎲', '🎪', '🎨', '🎭', '🎸', '🎹'];
+// Extended icons array with 40 unique symbols
+const ALL_CARD_SYMBOLS = [
+  // Entertainment & Games
+  '🎮', '🎯', '🎲', '🎪', '🎨', '🎭', '🎸', '🎹',
+  '🎺', '🎻', '🎤', '🎧', '🎬', '🎰', '🎳', '🏓',
+  
+  // Animals & Nature
+  '🐶', '🐱', '🐭', '🐹', '🐰', '🦊', '🐻', '🐼',
+  '🐨', '🐯', '🦁', '🐸', '🐵', '🐒', '🦋', '🐝',
+  
+  // Food & Drinks
+  '🍎', '🍊', '🍋', '🍌', '🍇', '🍓', '🍒', '🍑',
+  '🥝', '🍍', '🥭', '🍉', '🍕', '🍔', '🌭', '🍟',
+  
+  // Objects & Symbols
+  '⭐', '🌟', '✨', '💎', '🔥', '💧', '🌈', '☀️'
+];
+
+// Fisher-Yates shuffle algorithm for better randomization
+const shuffleArray = (array: any[]) => {
+  const shuffled = [...array];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
+};
+
+// Function to select random symbols for the game
+const selectRandomSymbols = (count = 8) => {
+  const shuffled = shuffleArray(ALL_CARD_SYMBOLS);
+  return shuffled.slice(0, count);
+};
 
 const MemoryFlipCardGame = () => {
+  const [difficulty, setDifficulty] = useState<'easy' | 'medium' | 'hard'>('easy');
+  const [cardSymbols, setCardSymbols] = useState<string[]>([]);
   const [cards, setCards] = useState<Card[]>([]);
   const [flippedCards, setFlippedCards] = useState<number[]>([]);
   const [matchedPairs, setMatchedPairs] = useState(0);
@@ -22,10 +56,22 @@ const MemoryFlipCardGame = () => {
   const [gameCompleted, setGameCompleted] = useState(false);
   const [bestScore, setBestScore] = useState<{moves: number, time: number} | null>(null);
 
+  const getDifficultySettings = () => {
+    switch(difficulty) {
+      case 'easy': return { pairs: 6, gridCols: 4 };
+      case 'medium': return { pairs: 8, gridCols: 4 };
+      case 'hard': return { pairs: 12, gridCols: 6 };
+      default: return { pairs: 6, gridCols: 4 };
+    }
+  };
+
   // Initialize game
   const initializeGame = useCallback(() => {
-    const shuffledCards = [...CARD_SYMBOLS, ...CARD_SYMBOLS]
-      .sort(() => Math.random() - 0.5)
+    const { pairs } = getDifficultySettings();
+    const selectedSymbols = selectRandomSymbols(pairs);
+    setCardSymbols(selectedSymbols);
+    
+    const shuffledCards = shuffleArray([...selectedSymbols, ...selectedSymbols])
       .map((symbol, index) => ({
         id: index,
         value: symbol,
@@ -40,7 +86,7 @@ const MemoryFlipCardGame = () => {
     setTime(0);
     setIsGameActive(false);
     setGameCompleted(false);
-  }, []);
+  }, [difficulty]);
 
   // Timer effect
   useEffect(() => {
@@ -53,7 +99,7 @@ const MemoryFlipCardGame = () => {
     return () => clearInterval(interval);
   }, [isGameActive, gameCompleted]);
 
-  // Initialize game on mount
+  // Initialize game on mount and difficulty change
   useEffect(() => {
     initializeGame();
   }, [initializeGame]);
@@ -126,7 +172,8 @@ const MemoryFlipCardGame = () => {
 
   // Check for game completion
   useEffect(() => {
-    if (matchedPairs === CARD_SYMBOLS.length && isGameActive) {
+    const { pairs } = getDifficultySettings();
+    if (matchedPairs === pairs && isGameActive) {
       setGameCompleted(true);
       setIsGameActive(false);
       
@@ -137,7 +184,7 @@ const MemoryFlipCardGame = () => {
         localStorage.setItem('memoryGameBestScore', JSON.stringify(newBestScore));
       }
     }
-  }, [matchedPairs, moves, time, isGameActive, bestScore]);
+  }, [matchedPairs, moves, time, isGameActive, bestScore, difficulty]);
 
   const formatTime = (seconds: number) => {
     const mins = Math.floor(seconds / 60);
@@ -146,18 +193,37 @@ const MemoryFlipCardGame = () => {
   };
 
   const getScoreRating = () => {
-    if (moves <= 12) return '🏆 Perfect!';
-    if (moves <= 16) return '⭐ Excellent!';
-    if (moves <= 20) return '👍 Good!';
-    if (moves <= 25) return '👌 Not bad!';
+    const { pairs } = getDifficultySettings();
+    const perfectMoves = pairs + 2;
+    const goodMoves = pairs * 2;
+    const okMoves = pairs * 2.5;
+    
+    if (moves <= perfectMoves) return '🏆 Perfect!';
+    if (moves <= goodMoves) return '⭐ Excellent!';
+    if (moves <= okMoves) return '👍 Good!';
     return '💪 Keep practicing!';
   };
+
+  const { pairs, gridCols } = getDifficultySettings();
 
   return (
     <div className={styles.container}>
       <div className={styles.header}>
         <h1 className={styles.title}>Memory Flip Card Game</h1>
-        <p className={styles.subtitle}>Find all matching pairs!</p>
+        <p className={styles.subtitle}>Challenge your mind and improve your memory!</p>
+      </div>
+
+      {/* Difficulty Selection */}
+      <div className={styles.difficultySelector}>
+        {(['easy', 'medium', 'hard'] as const).map((level) => (
+          <button
+            key={level}
+            className={`${styles.difficultyButton} ${difficulty === level ? styles.active : ''}`}
+            onClick={() => setDifficulty(level)}
+          >
+            {level.charAt(0).toUpperCase() + level.slice(1)} ({level === 'easy' ? '6' : level === 'medium' ? '8' : '12'} pairs)
+          </button>
+        ))}
       </div>
 
       <div className={styles.gameStats}>
@@ -171,7 +237,7 @@ const MemoryFlipCardGame = () => {
         </div>
         <div className={styles.stat}>
           <span className={styles.statLabel}>Pairs:</span>
-          <span className={styles.statValue}>{matchedPairs}/{CARD_SYMBOLS.length}</span>
+          <span className={styles.statValue}>{matchedPairs}/{pairs}</span>
         </div>
       </div>
 
@@ -181,7 +247,7 @@ const MemoryFlipCardGame = () => {
         </div>
       )}
 
-      <div className={styles.gameBoard}>
+      <div className={`${styles.gameBoard} ${styles[`grid${gridCols}`]}`}>
         {cards.map((card) => (
           <div
             key={card.id}
@@ -203,27 +269,25 @@ const MemoryFlipCardGame = () => {
       </div>
 
       {gameCompleted && (
-  <div className={styles.gameCompleted}>
-    <div className={styles.completionMessage}>
-      <h2>🎉 Congratulations!</h2>
-      <p>You completed the game!</p>
-      <div className={styles.finalStats}>
-        <p><strong>Moves:</strong> {moves}</p>
-        <p><strong>Time:</strong> {formatTime(time)}</p>
-        <p><strong>Rating:</strong> {getScoreRating()}</p>
-      </div>
+        <div className={styles.gameCompleted}>
+          <div className={styles.completionMessage}>
+            <h2>🎉 Congratulations!</h2>
+            <p>You completed the {difficulty} level!</p>
+            <div className={styles.finalStats}>
+              <p><strong>Moves:</strong> {moves}</p>
+              <p><strong>Time:</strong> {formatTime(time)}</p>
+              <p><strong>Rating:</strong> {getScoreRating()}</p>
+            </div>
 
-      {/* 👇 New Game button shown only after completion */}
-      <button 
-        className={styles.resetButton}
-        onClick={initializeGame}
-      >
-        🔄 New Game
-      </button>
-    </div>
-  </div>
-)}
-
+            <button 
+              className={styles.resetButton}
+              onClick={initializeGame}
+            >
+              🔄 Play Again
+            </button>
+          </div>
+        </div>
+      )}
 
       <div className={styles.gameControls}>
         <button 
@@ -234,15 +298,52 @@ const MemoryFlipCardGame = () => {
         </button>
       </div>
 
-      <div className={styles.instructions}>
-        <h3>How to Play:</h3>
-        <ul>
-          <li>Click on cards to flip them over</li>
-          <li>Find matching pairs of symbols</li>
-          <li>Try to complete the game in minimum moves</li>
-          <li>Challenge yourself to beat your best score!</li>
-        </ul>
-      </div>
+      {/* Enhanced How to Play Section */}
+      {/* How to Play Section */}
+<div className={styles.rulesContainer}>
+  <h3 className={styles.sectionTitle}>How to Play</h3>
+  <ul className={styles.rulesList}>
+    <li className={styles.ruleItem}>
+      <span className={styles.ruleNumber}>1. </span>
+      <span className={styles.ruleText}>Click on any card to flip it and reveal the symbol underneath</span>
+    </li>
+    <li className={styles.ruleItem}>
+      <span className={styles.ruleNumber}>2. </span>
+      <span className={styles.ruleText}>Find and click on another card to try and find a matching symbol</span>
+    </li>
+    <li className={styles.ruleItem}>
+      <span className={styles.ruleNumber}>3. </span>
+      <span className={styles.ruleText}>If the symbols match, the cards will stay flipped. If not, they'll flip back</span>
+    </li>
+    <li className={styles.ruleItem}>
+      <span className={styles.ruleNumber}>4. </span>
+      <span className={styles.ruleText}>Match all pairs to win the game</span>
+    </li>
+  </ul>
+</div>
+
+<div className={styles.rulesContainer}>
+  <h3 className={styles.sectionTitle}>Brain Benefits</h3>
+  <div className={styles.benefitsSection}>
+    <div className={styles.benefitItem}>
+      <h4 className={styles.benefitTitle}>🧠 Grey Matter Stimulation</h4>
+      <p className={styles.benefitDescription}>Strengthens neural connections in hippocampus (memory center)</p>
+    </div>
+    <div className={styles.benefitItem}>
+      <h4 className={styles.benefitTitle}>⚡ Mental Agility</h4>
+      <p className={styles.benefitDescription}>Improves cognitive flexibility and pattern recognition</p>
+    </div>
+    <div className={styles.benefitItem}>
+      <h4 className={styles.benefitTitle}>🎯 Focus Enhancement</h4>
+      <p className={styles.benefitDescription}>Builds attention span by resisting short-form content habits</p>
+    </div>
+    <div className={styles.benefitItem}>
+      <h4 className={styles.benefitTitle}>🔄 Information Processing</h4>
+      <p className={styles.benefitDescription}>Trains working memory and visual-spatial processing</p>
+    </div>
+  </div>
+</div>
+
     </div>
   );
 };
