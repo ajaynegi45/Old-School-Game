@@ -29,7 +29,7 @@ const ALL_CARD_SYMBOLS = [
 ];
 
 // Fisher-Yates shuffle algorithm for better randomization
-const shuffleArray = (array: any[]) => {
+const shuffleArray = <T,>(array: T[]): T[] => {
   const shuffled = [...array];
   for (let i = shuffled.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -105,12 +105,16 @@ const MemoryFlipCardGame = () => {
   }, [initializeGame]);
 
   // Load best score from localStorage
-  useEffect(() => {
+ useEffect(() => {
+  try {
     const savedBestScore = localStorage.getItem('memoryGameBestScore');
     if (savedBestScore) {
       setBestScore(JSON.parse(savedBestScore));
     }
-  }, []);
+  } catch (error) {
+    console.warn('Unable to load best score:', error);
+  }
+}, []);
 
   const handleCardClick = (clickedCard: Card) => {
     if (!isGameActive) {
@@ -218,6 +222,7 @@ const MemoryFlipCardGame = () => {
         {(['easy', 'medium', 'hard'] as const).map((level) => (
           <button
             key={level}
+            type="button"
             className={`${styles.difficultyButton} ${difficulty === level ? styles.active : ''}`}
             onClick={() => setDifficulty(level)}
           >
@@ -250,12 +255,23 @@ const MemoryFlipCardGame = () => {
       <div className={`${styles.gameBoard} ${styles[`grid${gridCols}`]}`}>
         {cards.map((card) => (
           <div
-            key={card.id}
-            className={`${styles.card} ${
-              card.isFlipped || card.isMatched ? styles.flipped : ''
-            } ${card.isMatched ? styles.matched : ''}`}
-            onClick={() => handleCardClick(card)}
-          >
+  key={card.id}
+  className={`${styles.card} ${
+    card.isFlipped || card.isMatched ? styles.flipped : ''
+  } ${card.isMatched ? styles.matched : ''}`}
+  onClick={() => handleCardClick(card)}
+  onKeyDown={(e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      handleCardClick(card);
+    }
+  }}
+  role="button"
+  tabIndex={0}
+  aria-label={`Card ${card.id + 1}${card.isFlipped || card.isMatched ? `, showing ${card.value}` : ''}`}
+  aria-pressed={card.isFlipped || card.isMatched}
+>
+
             <div className={styles.cardInner}>
               <div className={styles.cardFront}>
                 <span className={styles.cardSymbol}>?</span>
@@ -282,6 +298,7 @@ const MemoryFlipCardGame = () => {
             <button 
               className={styles.resetButton}
               onClick={initializeGame}
+              type="button"
             >
               🔄 Play Again
             </button>
@@ -293,6 +310,7 @@ const MemoryFlipCardGame = () => {
         <button 
           className={styles.resetButton}
           onClick={initializeGame}
+          type="button"
         >
           🔄 New Game
         </button>
@@ -304,20 +322,16 @@ const MemoryFlipCardGame = () => {
   <h3 className={styles.sectionTitle}>How to Play</h3>
   <ul className={styles.rulesList}>
     <li className={styles.ruleItem}>
-      <span className={styles.ruleNumber}>1. </span>
-      <span className={styles.ruleText}>Click on any card to flip it and reveal the symbol underneath</span>
+    Click on any card to flip it and reveal the symbol underneath
     </li>
     <li className={styles.ruleItem}>
-      <span className={styles.ruleNumber}>2. </span>
-      <span className={styles.ruleText}>Find and click on another card to try and find a matching symbol</span>
+      Find and click on another card to try and find a matching symbol
     </li>
     <li className={styles.ruleItem}>
-      <span className={styles.ruleNumber}>3. </span>
-      <span className={styles.ruleText}>If the symbols match, the cards will stay flipped. If not, they'll flip back</span>
+      If the symbols match, the cards will stay flipped. If not, they'll flip back
     </li>
     <li className={styles.ruleItem}>
-      <span className={styles.ruleNumber}>4. </span>
-      <span className={styles.ruleText}>Match all pairs to win the game</span>
+      Match all pairs to win the game
     </li>
   </ul>
 </div>

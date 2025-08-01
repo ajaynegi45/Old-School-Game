@@ -16,7 +16,7 @@
   font-size: 2.5rem;
   font-weight: bold;
   margin-bottom: 10px;
-  background: linear-gradient(135deg, #000000, #000000);
+  background: #000000;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -92,7 +92,7 @@
 }
 
 .bestScore {
-  background: linear-gradient(135deg, #000000, #000000);
+  background: #000000;
   color: white;
   padding: 10px 20px;
   border-radius: 8px;
@@ -257,8 +257,6 @@
 .resetButton:active {
   transform: translateY(0);
 }
-
-/* Minimal Rules Section with Perfect Spacing */
 .rulesContainer {
   max-width: 700px;
   margin: 2rem auto;
@@ -276,6 +274,7 @@
 
 /* Rules List Styling */
 .rulesList {
+  counter-reset: rule-counter;
   list-style-type: none;
   padding: 0;
   margin: 0 0 2rem 0;
@@ -286,6 +285,13 @@
   margin-bottom: 0.8rem;
   padding-left: 1.5rem;
   text-indent: -1.5rem;
+  counter-increment: rule-counter;
+}
+
+.ruleItem::before {
+  content: counter(rule-counter) ". ";
+  font-weight: bold;
+  margin-right: 0.5rem;
 }
 
 
@@ -337,32 +343,6 @@
   .benefitDescription {
     padding-left: 1.2rem;
   }
-}
-
-@media (max-width: 480px) {
-  .rulesContainer {
-    padding: 0 1rem;
-  }
-  
-  .sectionTitle {
-    font-size: 1.25rem;
-  }
-  
-  .ruleItem,
-  .benefitItem {
-    font-size: 0.95rem;
-    padding-left: 1rem;
-    text-indent: -1rem;
-  }
-  
-  .benefitDescription {
-    font-size: 0.92rem;
-    padding-left: 1rem;
-  }
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
   .container {
     padding: 15px;
   }
@@ -412,6 +392,25 @@
   .gameBoard {
     max-width: 280px;
     gap: 8px;
+  }
+   .rulesContainer {
+    padding: 0 1rem;
+  }
+  
+  .sectionTitle {
+    font-size: 1.25rem;
+  }
+  
+  .ruleItem,
+  .benefitItem {
+    font-size: 0.95rem;
+    padding-left: 1rem;
+    text-indent: -1rem;
+  }
+  
+  .benefitDescription {
+    font-size: 0.92rem;
+    padding-left: 1rem;
   }
   
   .grid6 {
