@@ -10,12 +10,12 @@ interface Contributor {
   html_url: string;
 }
 
-export default function ContributorsPage() {
+  export default function ContributorsPage() {
   const [contributors, setContributors] = useState<Contributor[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("https://api.github.com/repos/openml-stack/SentiLog-AI/contributors")
+    fetch("/api/contributors")
       .then((res) => res.json())
       .then((data) => {
         if (Array.isArray(data)) {
