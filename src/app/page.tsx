@@ -1,9 +1,10 @@
-// "use client";
+"use client";
 
 import Image from "next/image";
 import Link from "next/link";
 import TicTacToeImage from "/public/tic-tac-toe.svg";
 import styles from "./page.module.css";
+// import LightsOut from "@/components/LightsOut"; // REMOVE: LightsOut game doesn't belong here
 
 // import { useRouter } from 'next/navigation'; // Import useRouter from Next.js
 // import io from 'socket.io-client'; // Import Socket.io client library
@@ -21,7 +22,6 @@ export default function Home() {
     //     });
     // };
 
-
     return (
         <header className={styles.headerContainer}>
             <div id={styles.bgGrid}>
@@ -30,7 +30,14 @@ export default function Home() {
 
             <div className={styles.heroSection}>
                 <div className={styles.tictactoeImageConatiner}>
-                    <Image src={TicTacToeImage} alt={"tic-tac-toe.svg"} width={"100"} height={"88"} loading={"eager"} priority={true} />
+                    <Image
+                        src={TicTacToeImage}
+                        alt={"tic-tac-toe.svg"}
+                        width={"100"}
+                        height={"88"}
+                        loading={"eager"}
+                        priority={true}
+                    />
                 </div>
                 <h1>Unlock Your Mind&apos;s Potential</h1>
                 <p>Train Smarter, Not Harder!</p>
@@ -49,6 +56,5 @@ export default function Home() {
         </header>
     );
 }
-
 
 // "dev": "concurrently \"next dev\" \"npm run websocket:dev\"",

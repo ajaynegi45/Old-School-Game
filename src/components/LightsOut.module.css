@@ -1,0 +1,96 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+  min-height: 100vh;
+  background-color: var(--background);
+  color: var(--text);
+  gap: 1.5rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(5, 60px);
+  gap: 12px;
+  margin-top: 1rem;
+  border: solid 1.8px #2E865F;
+  padding: 0.5rem;
+}
+
+.cell {
+  width: 60px;
+  height: 60px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.25s ease, box-shadow 0.3s ease;
+}
+
+.on {
+  background-color: var(--light-green);
+  box-shadow: 0 0 12px 4px rgba(144, 238, 144, 0.6); /* glow */
+}
+
+.off {
+  background-color: var(--dark-grey);
+  box-shadow: none;
+}
+
+.reset {
+  padding: 0.6rem 1.2rem;
+  border: none;
+  background-color: var(--green);
+  color: white;
+  font-weight: 600;
+  font-size: 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.reset:hover {
+  background-color: var(--green-dark);
+}
+
+.message {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: var(--light-green);
+  text-align: center;
+}
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 1rem;
+}
+
+.select {
+  padding: 0.4rem 0.6rem;
+  font-size: 1rem;
+  background-color: var(--dark-grey);
+  color: var(--text);
+  border: 1px solid #555;
+  border-radius: 4px;
+}
+.timer {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  color: var(--green);
+}
+
+.difficultyButton {
+  padding: 0.6rem 1.4rem;
+  font-size: 1rem;
+  background-color: #FFC107;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+
+
