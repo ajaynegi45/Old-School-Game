@@ -41,7 +41,7 @@
     color: rgb(59, 61, 65);
     letter-spacing: 0.03em;
     font-weight: 650;
-    /*filter: drop-shadow(0 0 0.80rem #A0A5AC);*/
+    
     text-transform: uppercase;
     margin: 0;
 }
@@ -55,7 +55,7 @@
     color: rgb(59, 61, 65);
     letter-spacing: -0.01em;
     font-weight: 650;
-    /*filter: drop-shadow(0 0 0.80rem #A0A5AC);*/
+    
     text-transform: uppercase;
     text-decoration: none;
     margin-left: 92rem;
@@ -65,7 +65,7 @@
     color: rgb(59, 61, 65);
     letter-spacing: -0.01em;
     font-weight: 650;
-    /*filter: drop-shadow(0 0 0.80rem #A0A5AC);*/
+    
     text-transform: uppercase;
     text-decoration: none;
 }
@@ -100,7 +100,7 @@
     }
 }
 
-/* ✅ Tablet (701px to 1120px) */
+/*  Tablet (701px to 1120px) */
 @media (min-width: 701px) and (max-width: 1120px) {
     .navbar {
         width: 93%;
@@ -115,13 +115,13 @@
 
     }
     .link {
-        margin-left: 2rem; /* Adjust for smaller desktop width */
+        margin-left: 2rem; 
         margin-top: 0;
         margin-left: 300px; 
     }
 }
 
-/* ✅ Small Desktop (1121px to 1400px) */
+/*  Small Desktop (1121px to 1400px) */
 @media (min-width: 1121px) and (max-width: 1400px) {
     .navbar {
         width: 90%;
@@ -143,7 +143,7 @@
 }
 
 
-/* ✅ Small Desktop (1121px to 1400px) */
+/*  Small Desktop (1121px to 1400px) */
 @media (min-width: 1600px) and (max-width: 1900px) {
     .navbar {
         width: 90%;
@@ -160,7 +160,7 @@
     }
 
     .link {
-        margin-left: 1050px; /* Reduce from 92rem */
+        margin-left: 1050px; 
     }
 }
 
