@@ -41,7 +41,7 @@
     color: rgb(59, 61, 65);
     letter-spacing: 0.03em;
     font-weight: 650;
-    
+    /*filter: drop-shadow(0 0 0.80rem #A0A5AC);*/
     text-transform: uppercase;
     margin: 0;
 }
@@ -55,7 +55,7 @@
     color: rgb(59, 61, 65);
     letter-spacing: -0.01em;
     font-weight: 650;
-    
+    /*filter: drop-shadow(0 0 0.80rem #A0A5AC);*/
     text-transform: uppercase;
     text-decoration: none;
     margin-left: 92rem;
@@ -65,7 +65,7 @@
     color: rgb(59, 61, 65);
     letter-spacing: -0.01em;
     font-weight: 650;
-    
+    /*filter: drop-shadow(0 0 0.80rem #A0A5AC);*/
     text-transform: uppercase;
     text-decoration: none;
 }
