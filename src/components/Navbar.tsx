@@ -12,7 +12,6 @@ const Navbar = () => {
                     </Link>
                     
                     <Link href="https://github.com/ajaynegi45/Old-School-Game" className={styles.link}>Github</Link>
-                    <Link href="/contributors" className={styles.contributor}>Contributors</Link>
                 </nav>
             </div>
             <div className={styles["fade-navbar-effect"]}></div>

@@ -1,41 +1,118 @@
 .container {
-  text-align: center;
+  max-width: 100%;
+  margin: 0 auto;
   padding: 2rem;
+   /* light paper-like background */
+  font-family: 'Arial', sans-serif;
+  text-align: center;
 }
 
-.title {
-  font-size: 2rem;
+/* Header Section */
+.heading {
+  margin-bottom: 2rem;
+}
+
+.heading h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
   margin-bottom: 0.5rem;
 }
 
-.description {
-  font-size: 1rem;
-  margin-bottom: 2rem;
-  color: #292525;
+.heading p {
+  color: #555;
+  font-size: 1.5rem;
 }
 
+/* Section Title */
+
+.section h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  font-weight: bold;
+}
+
+/* Contributors & Commit Grid */
 .grid {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 1rem;
-  margin-top: 1.5rem;
+  gap: 2rem;
+  justify-items: center;
+  margin-bottom: 2rem;
+}
+
+/* Contributor Cards */
+.card {
+  background: white;
+  padding: 1rem;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.avatar {
+  border-radius: 50%;
+  margin-bottom: 0.5rem;
+}
+
+/* Contributor Name */
+.username {
+  font-weight: bold;
+  color: #000;
+}
+
+/* Commit Cards */
+.commitCard {
+  display: flex;
+  align-items: center;
+  background: white;
+  padding: 1rem;
+  border-radius: 10px;
+  text-decoration: none;
+  color: inherit;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+}
+
+.commitCard:hover {
+  transform: scale(1.02);
+}
+
+.commitCardDetails {
+  text-align: left;
+  margin-left: 1rem;
 }
 
 .message {
-  font-size: 1.1rem;
+  color: #333;
+  font-size: 0.9rem;
+  margin: 0.2rem 0;
+}
+
+.time {
+  font-size: 0.8rem;
   color: #777;
 }
 
-.section {
+/* Contributing Section */
+.section hr {
   margin: 2rem 0;
 }
 
 .link {
-  color: #0070f3;
+  color: #0366d6;
   text-decoration: none;
 }
 
 .link:hover {
   text-decoration: underline;
 }
+
+

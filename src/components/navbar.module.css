@@ -58,20 +58,10 @@
     /*filter: drop-shadow(0 0 0.80rem #A0A5AC);*/
     text-transform: uppercase;
     text-decoration: none;
-    margin-left: 92rem;
-}
-.contributor {
-    font-size: 14px;
-    color: rgb(59, 61, 65);
-    letter-spacing: -0.01em;
-    font-weight: 650;
-    /*filter: drop-shadow(0 0 0.80rem #A0A5AC);*/
-    text-transform: uppercase;
-    text-decoration: none;
 }
 
 /* Hover Effects */
-.title:hover, .link:hover, .contributor:hover {
+.title:hover, .link:hover {
     cursor: pointer;
     color: rgb(0, 0, 0);
 }
@@ -80,90 +70,13 @@
 
 /* Mobile */
 @media (max-width: 700px) {
-    .navbar {
-        width: 100%;
-        padding: 10px;
-        flex-direction: row;
-        height: auto;
-    }
-    .title, 
-    .link, 
-    .contributor {
-        font-size: 12px;
-        flex-direction: row;
-        justify-content: center;
 
-    }
-    .link {
-        margin-left: 80px;
-        margin-top: 0;
-    }
 }
 
-/*  Tablet (701px to 1120px) */
+/* Tablet and Smaller Desktop */
 @media (min-width: 701px) and (max-width: 1120px) {
     .navbar {
         width: 93%;
-        padding: 15px;
-    }
-    .title, 
-    .link, 
-    .contributor {
-        font-size: 13px;
-        flex-direction: row;
-        justify-content: center;
-
-    }
-    .link {
-        margin-left: 2rem; 
-        margin-top: 0;
-        margin-left: 300px; 
     }
 }
-
-/*  Small Desktop (1121px to 1400px) */
-@media (min-width: 1121px) and (max-width: 1400px) {
-    .navbar {
-        width: 90%;
-    }
-    
-    .title, 
-    .link, 
-    .contributor {
-        font-size: 15px;
-        flex-direction: row;
-        justify-content: center;
-        gap: 1rem;
-
-    }
-
-    .link {
-        margin-left: 650px; /* Reduce from 92rem */
-    }
-}
-
-
-/*  Small Desktop (1121px to 1400px) */
-@media (min-width: 1600px) and (max-width: 1900px) {
-    .navbar {
-        width: 90%;
-    }
-    
-    .title, 
-    .link, 
-    .contributor {
-        font-size: 15px;
-        flex-direction: row;
-        justify-content: center;
-        gap: 1rem;
-
-    }
-
-    .link {
-        margin-left: 1050px; 
-    }
-}
-
-
-
 
