@@ -10,7 +10,6 @@ export default function LightsOutGame() {
   const timerRef = useRef<NodeJS.Timeout | null>(null);
   const [mounted, setMounted] = useState(false);
 
-  // Prevent hydration mismatch by delaying rendering until after mount
   useEffect(() => {
     setMounted(true);
   }, []);
@@ -70,18 +69,17 @@ export default function LightsOutGame() {
         <button className={styles.difficultyButton} onClick={() => setGridSize(5)}>Medium</button>
         <button className={styles.difficultyButton} onClick={() => setGridSize(7)}>Hard</button>
         <span className={styles.timer}>Timer: {timer}s</span>
-    </div>
-
+      </div>
 
       <div
         className={styles.grid}
-        style={{ gridTemplateColumns: `repeat(${gridSize}, 60px)` }}
+        style={{ "--cols": gridSize } as React.CSSProperties}
       >
         {grid.map((row, i) =>
           row.map((cell, j) => (
             <div
               key={`${i}-${j}`}
-              className={`${styles.cell} ${cell ? styles.on : ""}`}
+              className={`${styles.cell} ${cell ? styles.on : styles.off}`}
               onClick={() => toggle(i, j)}
             />
           ))
@@ -90,9 +88,26 @@ export default function LightsOutGame() {
 
       {isWon && (
         <div className={styles.winMessage}>
-           You won in {timer} seconds!
+          You won in {timer} seconds!
         </div>
       )}
+
+      <div className={styles.instructions}>
+        <h2>How to Play</h2>
+        <p>
+          The goal of <strong>Lights Out</strong> is to turn off all the cells in the grid. 
+          Clicking a cell will toggle its state and the state of its adjacent neighbors (top, bottom, left, right). 
+          Grey cells are ON and green cells are OFF.
+        </p>
+
+        <h2>Game Algorithm</h2>
+        <p>
+          The game uses a 2D boolean array to represent the grid. When a player clicks on a cell, the toggle() function is called, which inverts the clicked cell and its immediate neighbors using boundary-safe checks.
+        </p>
+        <p>
+          A win is detected when all values in the grid are false (OFF state).
+        </p>
+      </div>
     </div>
   );
 }

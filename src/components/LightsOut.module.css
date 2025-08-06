@@ -11,29 +11,31 @@
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(5, 60px);
-  gap: 12px;
-  margin-top: 1rem;
-  border: solid 1.8px #2E865F;
-  padding: 0.5rem;
+  grid-template-columns: repeat(var(--cols), 1fr);
+  width: fit-content;
+  margin: 2rem auto 0 auto;
+  border: 2px solid #2E865F;
+  gap: 0;
 }
 
 .cell {
+  aspect-ratio: 1 / 1;
   width: 60px;
-  height: 60px;
-  border-radius: 8px;
-  border: none;
+  border: 1px solid #2E865F;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
-  transition: background-color 0.25s ease, box-shadow 0.3s ease;
+  transition: background-color 0.2s ease;
 }
 
 .on {
-  background-color: var(--light-green);
-  box-shadow: 0 0 12px 4px rgba(144, 238, 144, 0.6); /* glow */
+  background-color: #F2F2F2;
+  box-shadow: 0 0 12px 4px rgba(144, 238, 144, 0.6); 
 }
 
 .off {
-  background-color: var(--dark-grey);
+  background-color: #22C55E;
   box-shadow: none;
 }
 
@@ -92,5 +94,58 @@
   transition: background-color 0.2s ease;
 }
 
+.instructions {
+  margin-top: 3rem;
+  padding: 1.2rem;
+  color: #333;
+  border-radius: 10px;
+  max-width: 600px;
+  line-height: 1.6;
+}
 
+.instructions h2 {
+  margin-top: 1rem;
+  color: #2E865F;
+}
 
+.instructions code {
+  background-color: #e0e0e0;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: monospace;
+}
+
+.instructions pre {
+  background-color: #e9e9e9;
+  padding: 1rem;
+  border-radius: 6px;
+  overflow-x: auto;
+}
+@media (max-width: 768px) {
+  .difficultyButton,
+  .reset {
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem;
+  }
+
+  .timer {
+    font-size: 1rem;
+  }
+
+  .instructions {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .instructions {
+    padding: 1rem;
+    font-size: 0.9rem;
+  }
+
+  .difficultyButton,
+  .reset {
+    font-size: 0.85rem;
+    padding: 0.4rem 0.8rem;
+  }
+}
