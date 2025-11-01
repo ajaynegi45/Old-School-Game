@@ -7,11 +7,6 @@
     padding: 1rem 2rem;
 
 }
-.navbar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
 .navbar{
     display: flex;
     justify-content: space-between;

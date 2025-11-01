@@ -1,4 +1,4 @@
-@import url('https://font.googlepapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+@import url('https://font.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 :root {
   --font-hero: 'Decorative Font',cursive;
   --font-body: 'Poppins',sans-serif;
@@ -8,7 +8,7 @@
   --black: #000000;
 
 
-  --purple-primary: #6F42C1,
+  --purple-primary: #6F42C1;
   --purple-secondary: #402771;
 
   --accent-pink: #E83E8C;

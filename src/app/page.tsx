@@ -51,7 +51,7 @@ export default function Home() {
                 {/*Replace with actual collage image */}
                 <Image src={CollageImage} alt="Classic Games Collage" className="responsiveImage" />
                 <div className={styles.heroImageContainer1}>
-                <Image src={Eclipse} alt="Eclipse" layout="responsive" width={929} height={88} style={{width: '100%', height: '100%', display: 'block'}} />
+                <Image src={Eclipse} alt="Eclipse" layout="responsive" width={929} height={88} />
                 </div>
             </div>
             </header>
@@ -60,10 +60,7 @@ export default function Home() {
             <section className="trendingSection">
                 <h2 className={styles.sectionHeading}>Trending Games</h2>
                 {/*Tic-Tac-Toe Card*/}
-                <div className={`${styles.trendingCard} ${styles.cardLeft}`}
-                onClick={()=>handleCardClick("/game/tic-tac-toe")}
-                role="link"
-                tabIndex={0} >
+                <div className={`${styles.trendingCard} ${styles.cardLeft}`}>
                 <div className={styles.trendingImageContainer}>
                     <Image src={TicTacToeCardImage} alt="Tic-Tac-Toe Game" width={545} height={558}/>
                 </div>
@@ -78,10 +75,7 @@ export default function Home() {
                 </div>
                 </div>
                 {/* Sudoku Game Card*/}
-                 <div className={`${styles.trendingCard} ${styles.cardRight}`}
-                 onClick={()=>handleCardClick("/game/sudoku")}
-                role="link"
-                tabIndex={0} >
+                 <div className={`${styles.trendingCard} ${styles.cardRight}`}>
                 <div className={styles.trendingImageContainer}>
                     <Image src={SudokuImage} alt="Sudoku Game" width={527} height={445}/>
                 </div>
@@ -117,7 +111,7 @@ export default function Home() {
             <section className={styles.faqSection}>
                 
                     <h2 className={styles.sectionHeading}>Frequently Asked Questions</h2>
-                    <p>Subsribe to our newletter for new game releases and mind-bending challenges.</p>
+                    <p>Subscribe to our newletter for new game releases and mind-bending challenges.</p>
                 <div className={styles.faqItem}>
                    <h3 className={styles.faqQuestion}>Who can play The Old School Game?</h3>
                     <p className={styles.faqAnswer}>The Old School Game can be played by everyone, irrespective of your age, as long as you have games or looking to relax your brain.</p>

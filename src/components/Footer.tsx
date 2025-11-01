@@ -10,7 +10,7 @@ export default function Footer() {
             <div className={styles.newsletter}>
                     <h3>Subscribe to our Newsletter</h3>
                     <p>Stay updated with the latest classic games & new releases.</p>
-                        <form className={styles.newletterForm}>
+                        <form className={styles.newsletterForm}>
                             <input  type="email" placeholder="Enter Your email" required />
                             <button type="submit">Subscribe</button>
                         </form>
