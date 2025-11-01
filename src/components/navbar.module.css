@@ -1,69 +1,37 @@
-.navbar-container{
+.navbarContainer{
     width: 100%;
-    backdrop-filter: blur(10px);
-    z-index: 100;
-    position: fixed;
-    display: flex;
-    justify-content: center;
+    z-index: 50;
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 1rem 2rem;
 
 }
-.navbar {
-    width: 95%;
-    height: 4rem;
+.navbar{
     display: flex;
-    flex-direction: row;
-    align-items: center;
     justify-content: space-between;
-    padding: 22px 0 20px 0;
-    border-bottom: 1px solid #E1E4E8;
+    align-items: center;
 }
-.fade-navbar-effect{
-    width: 100%;
-    height: 4rem;
-    margin-top: 3rem;
-    backdrop-filter: blur(10px);
-    z-index: 1;
-    position: fixed;
-    /*background-image: linear-gradient(294deg, rgb(59, 61, 65) 0%, rgba(255, 0, 0, 0.8) 108.834%);*/
-    -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.2) 90%, rgba(0, 0, 0, 0) 100%);
-    mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.2) 90%, rgba(0, 0, 0, 0) 100%);
-    backdrop-filter: blur(10px);
-}
-.empty-navbar{
-    margin-top: 2rem;
-    height: 4rem;
-    width: 95%;
-}
-
-
-.title {
-    font-size: 14px;
-    color: rgb(59, 61, 65);
-    letter-spacing: 0.03em;
-    font-weight: 650;
-    /*filter: drop-shadow(0 0 0.80rem #A0A5AC);*/
-    text-transform: uppercase;
-    margin: 0;
-}
-
-.heading {
+.logo{
+    font-family: var(--font-protest-riot), cursive;
+    font-size: 1.5rem;
+    color: white;
     text-decoration: none;
 }
-
-.link {
+.githubButton {
     font-size: 14px;
-    color: rgb(59, 61, 65);
-    letter-spacing: -0.01em;
-    font-weight: 650;
-    /*filter: drop-shadow(0 0 0.80rem #A0A5AC);*/
-    text-transform: uppercase;
+    color: white;
+    background: #f268b3;
+    padding: 0.5rem 1.25rem;
+    font-family: var(--font-poppins), sans-serif;
+    font-weight: 600;
+    transition: background 0.3s ease;
     text-decoration: none;
 }
 
 /* Hover Effects */
-.title:hover, .link:hover {
-    cursor: pointer;
-    color: rgb(0, 0, 0);
+.githubButton:hover {
+    background: #d9579d;
 }
 
 
