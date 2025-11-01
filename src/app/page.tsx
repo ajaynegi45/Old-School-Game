@@ -20,9 +20,9 @@ import styles from "./page.module.css";
 // ]
 export default function Home() {
 
-    const handleCardClick=(path:string)=>{
-        console.log(`Navigating to: ${path}`);
-    };
+    // const handleCardClick=(path:string)=>{
+    //     console.log(`Navigating to: ${path}`);
+    // };
     // const router = useRouter();
     // const handleCreateGame = () => {
     //     socket.emit('createGame'); // Emit create game event to the server
