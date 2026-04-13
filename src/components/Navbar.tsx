@@ -8,7 +8,7 @@ const Navbar = () => {
             <div className={styles["navbar-container"]}>
                 <nav className={styles["navbar"]}>
                     <Link href="/" className={styles["heading"]}>
-                        <h3 className={styles["title"]}>OLD SCHOOL GAME</h3>
+                        <h2 className={styles["title"]}>OLD SCHOOL GAME</h2>
                     </Link>
                     <Link href="https://github.com/ajaynegi45/Old-School-Game" className={styles.link}>Github</Link>
                 </nav>
