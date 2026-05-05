@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useEffect, useRef, useCallback } from 'react'
+import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import styles from './page.module.css'
 import {
@@ -27,12 +27,15 @@ type ErrorKind =
   | null
 
 // ---------------------------------------------------------------------------
-// Helpers
+// Constants
 // ---------------------------------------------------------------------------
 
-/** Returns an array describing which positions changed vs the previous word */
-function getChangedPositions(prev: string, current: string): boolean[] {
-  return current.split('').map((ch, i) => ch !== prev[i])
+const VALID_DIFFICULTIES: readonly Difficulty[] = ['easy', 'medium', 'hard']
+
+const MAX_LIVES: Record<Difficulty, number> = {
+  easy: 5,
+  medium: 3,
+  hard: 2,
 }
 
 const ERROR_MESSAGES: Record<NonNullable<ErrorKind>, string> = {
@@ -44,27 +47,25 @@ const ERROR_MESSAGES: Record<NonNullable<ErrorKind>, string> = {
 }
 
 // ---------------------------------------------------------------------------
-// Lives per difficulty
+// Helpers
 // ---------------------------------------------------------------------------
 
-const MAX_LIVES: Record<Difficulty, number> = {
-  easy: 5,
-  medium: 3,
-  hard: 2,
+/** Returns an array describing which positions changed vs the previous word */
+function getChangedPositions(prev: string, current: string): boolean[] {
+  return current.split('').map((ch, i) => ch !== prev[i])
+}
+
+/** Validates the difficulty search param against the allowlist */
+function parseDifficulty(value: string | null): Difficulty {
+  if (value !== null && (VALID_DIFFICULTIES as string[]).includes(value)) {
+    return value as Difficulty
+  }
+  return 'medium'
 }
 
 // ---------------------------------------------------------------------------
 // Component
 // ---------------------------------------------------------------------------
-
-const VALID_DIFFICULTIES: readonly Difficulty[] = ['easy', 'medium', 'hard']
-
-function parseDifficulty(value: string | null): Difficulty {
-  if (value && (VALID_DIFFICULTIES as string[]).includes(value)) {
-    return value as Difficulty
-  }
-  return 'medium'
-}
 
 export default function WordLadderGame() {
   const router = useRouter()
@@ -78,14 +79,30 @@ export default function WordLadderGame() {
   const [error, setError] = useState<ErrorKind>(null)
   const [hint, setHint] = useState<string | null>(null)
   const [hintsUsed, setHintsUsed] = useState(0)
-  const [lives, setLives] = useState(MAX_LIVES[difficulty])
+  const [lives, setLives] = useState<number>(() => MAX_LIVES[difficulty])
   const [shake, setShake] = useState(false)
+
   const inputRef = useRef<HTMLInputElement>(null)
+  // Refs to hold pending timeout IDs so we can clean them up
+  const shakeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const lostTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   const maxLives = MAX_LIVES[difficulty]
 
-  // Initialise a new puzzle
+  // ── Cleanup timers on unmount ───────────────────────────────────────────
+  useEffect(() => {
+    return () => {
+      if (shakeTimerRef.current) clearTimeout(shakeTimerRef.current)
+      if (lostTimerRef.current) clearTimeout(lostTimerRef.current)
+    }
+  }, [])
+
+  // ── Initialise / reset a puzzle ─────────────────────────────────────────
   const initPuzzle = useCallback(() => {
+    // Cancel any pending timers from a previous game
+    if (shakeTimerRef.current) clearTimeout(shakeTimerRef.current)
+    if (lostTimerRef.current) clearTimeout(lostTimerRef.current)
+
     const p = getRandomPuzzle(difficulty)
     setPuzzle(p)
     setChain([p.start])
@@ -101,24 +118,36 @@ export default function WordLadderGame() {
     initPuzzle()
   }, [initPuzzle])
 
+  // Focus the input whenever the player can act
   useEffect(() => {
     if (status === 'playing') inputRef.current?.focus()
   }, [status, chain])
 
-  // ── Derived ─────────────────────────────────────────────────────────────
+  // ── Derived values ───────────────────────────────────────────────────────
   const stepsUsed = chain.length - 1
   const stepsLeft = puzzle ? puzzle.maxSteps - stepsUsed : 0
   const currentWord = chain[chain.length - 1] ?? ''
 
+  // O(1) lookup for already-used words — avoids O(n) array scan on every submit
+  const usedWordSet = useMemo(() => new Set(chain), [chain])
+
+  // ── Error helper ─────────────────────────────────────────────────────────
+  const triggerError = useCallback((kind: ErrorKind) => {
+    setError(kind)
+    setShake(true)
+    if (shakeTimerRef.current) clearTimeout(shakeTimerRef.current)
+    shakeTimerRef.current = setTimeout(() => setShake(false), 500)
+  }, [])
+
   // ── Submit a word ────────────────────────────────────────────────────────
-  const handleSubmit = () => {
+  const handleSubmit = useCallback(() => {
     if (!puzzle || status !== 'playing') return
     const word = input.trim().toUpperCase()
     if (word === '') return
 
     setHint(null)
 
-    // ── Validations that do NOT cost a life ──
+    // ── Validations that do NOT cost a life ──────────────────────────────
     if (word.length !== puzzle.start.length) {
       triggerError('wrong-length')
       return
@@ -131,22 +160,26 @@ export default function WordLadderGame() {
       triggerError('multiple-changes')
       return
     }
-    if (chain.includes(word)) {
+    if (usedWordSet.has(word)) {
       triggerError('already-used')
       return
     }
 
-    // ── Validation that COSTS a life: not in dictionary ──
+    // ── Dictionary check — costs one life ────────────────────────────────
     if (!isValidWord(word)) {
       triggerError('not-a-word')
-      const newLives = lives - 1
-      setLives(newLives)
-      if (newLives <= 0) {
-        setTimeout(() => setStatus('lost'), 400)
-      }
+      setLives((prev) => {
+        const next = prev - 1
+        if (next <= 0) {
+          if (lostTimerRef.current) clearTimeout(lostTimerRef.current)
+          lostTimerRef.current = setTimeout(() => setStatus('lost'), 400)
+        }
+        return next
+      })
       return
     }
 
+    // ── Valid move ───────────────────────────────────────────────────────
     const newChain = [...chain, word]
     setChain(newChain)
     setInput('')
@@ -160,29 +193,20 @@ export default function WordLadderGame() {
     if (newChain.length - 1 >= puzzle.maxSteps) {
       setStatus('lost')
     }
-  }
+  }, [puzzle, status, input, currentWord, usedWordSet, chain, triggerError])
 
-  const triggerError = (kind: ErrorKind) => {
-    setError(kind)
-    setShake(true)
-    setTimeout(() => setShake(false), 500)
-  }
-
-  const handleHint = () => {
+  // ── Hint ─────────────────────────────────────────────────────────────────
+  const handleHint = useCallback(() => {
     if (!puzzle || status !== 'playing') return
-    // Pass the full chain so BFS avoids already-used words
+    // Pass the full chain so BFS never suggests an already-used word
     const next = getHint(currentWord, puzzle.target, chain)
-    if (next) {
-      setHint(next)
-      setHintsUsed((h: number) => h + 1)
-    } else {
-      setHint('no-path')
-    }
-  }
+    setHint(next ?? 'no-path')
+    setHintsUsed((h) => h + 1)
+  }, [puzzle, status, currentWord, chain])
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyDown = useCallback((e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') handleSubmit()
-  }
+  }, [handleSubmit])
 
   // ── Render ───────────────────────────────────────────────────────────────
   if (!puzzle) {
