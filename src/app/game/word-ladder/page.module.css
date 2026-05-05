@@ -1,0 +1,348 @@
+/* ============================================================
+   Word Ladder — Landing Page Styles
+   Theme colour: #F97316 (orange)
+   ============================================================ */
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 24px 20px 60px;
+  color: #1e293b;
+  font-family: Inter, Helvetica, sans-serif;
+}
+
+/* ── Hero ─────────────────────────────────────────────────── */
+.hero {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.badge {
+  display: inline-block;
+  background: #fff7ed;
+  color: #c2410c;
+  border: 1px solid #fed7aa;
+  border-radius: 999px;
+  padding: 4px 14px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.title {
+  font-size: clamp(2.2rem, 6vw, 3.6rem);
+  font-weight: 800;
+  background: linear-gradient(135deg, #f97316, #ea580c);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 12px;
+  line-height: 1.1;
+}
+
+.subtitle {
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
+  color: #64748b;
+  max-width: 520px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* ── Sections ─────────────────────────────────────────────── */
+.section {
+  background: #ffffff;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 20px;
+  padding: 32px 28px;
+  margin-bottom: 28px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+}
+
+.sectionTitle {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+/* ── Difficulty ───────────────────────────────────────────── */
+.difficultyGrid {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 28px;
+}
+
+.diffBtn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 18px 22px;
+  min-width: 150px;
+  border: 2px solid #e2e8f0;
+  border-radius: 16px;
+  background: #f8fafc;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  font-family: inherit;
+}
+
+.diffBtn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+
+.diffBtnActive {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(249, 115, 22, 0.2);
+}
+
+.diffLabel {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #334155;
+}
+
+.diffWordLen {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #64748b;
+}
+
+.diffSteps {
+  font-size: 0.78rem;
+  color: #94a3b8;
+}
+
+.diffDesc {
+  font-size: 0.75rem;
+  color: #94a3b8;
+  text-align: center;
+  margin-top: 4px;
+}
+
+.startBtn {
+  display: block;
+  margin: 0 auto;
+  padding: 16px 40px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: white;
+  border: none;
+  border-radius: 14px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 14px rgba(249, 115, 22, 0.35);
+  font-family: inherit;
+}
+
+.startBtn:hover {
+  filter: brightness(1.1);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(249, 115, 22, 0.4);
+}
+
+.startBtn:active {
+  transform: translateY(0);
+}
+
+/* ── How-to-play ──────────────────────────────────────────── */
+.rulesList {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 28px;
+}
+
+.rule {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.ruleNum {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #f97316, #ea580c);
+  color: white;
+  font-weight: 700;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.rule p {
+  line-height: 1.6;
+  color: #475569;
+  padding-top: 4px;
+}
+
+/* ── Example ──────────────────────────────────────────────── */
+.exampleBox {
+  background: #fff7ed;
+  border: 1.5px solid #fed7aa;
+  border-radius: 14px;
+  padding: 20px;
+  text-align: center;
+}
+
+.exampleLabel {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #9a3412;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 12px;
+}
+
+.exampleChain {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.exampleItem {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.exampleWord {
+  background: white;
+  border: 2px solid #f97316;
+  border-radius: 8px;
+  padding: 6px 12px;
+  font-family: monospace;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #ea580c;
+  letter-spacing: 0.1em;
+}
+
+.arrow {
+  font-size: 1.1rem;
+  color: #f97316;
+  font-weight: 700;
+}
+
+/* ── Benefits ─────────────────────────────────────────────── */
+.benefitsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 18px;
+}
+
+.benefit {
+  background: #f8fafc;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 20px 16px;
+  text-align: center;
+}
+
+.benefitIcon {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.benefit h3 {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 8px;
+}
+
+.benefit p {
+  font-size: 0.82rem;
+  color: #64748b;
+  line-height: 1.55;
+}
+
+/* ── Science ──────────────────────────────────────────────── */
+.scienceSection {
+  background: #f0fdf4;
+  border-color: #bbf7d0;
+}
+
+.scienceList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.scienceList li {
+  padding: 14px 18px;
+  background: white;
+  border-radius: 10px;
+  border-left: 4px solid #22c55e;
+  font-size: 0.88rem;
+  color: #374151;
+  line-height: 1.6;
+}
+
+.scienceList li em {
+  color: #16a34a;
+}
+
+/* ── Bottom CTA ───────────────────────────────────────────── */
+.ctaBottom {
+  text-align: center;
+  margin-top: 12px;
+}
+
+/* ── Responsive ───────────────────────────────────────────── */
+@media (max-width: 600px) {
+  .section {
+    padding: 22px 16px;
+  }
+
+  .difficultyGrid {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .diffBtn {
+    flex-direction: row;
+    justify-content: flex-start;
+    min-width: unset;
+    gap: 12px;
+  }
+
+  .diffLabel {
+    min-width: 64px;
+  }
+
+  .diffDesc {
+    display: none;
+  }
+
+  .exampleChain {
+    gap: 4px;
+  }
+
+  .exampleWord {
+    font-size: 0.9rem;
+    padding: 4px 8px;
+  }
+
+  .benefitsGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 360px) {
+  .benefitsGrid {
+    grid-template-columns: 1fr;
+  }
+}

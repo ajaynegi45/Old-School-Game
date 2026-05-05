@@ -7,6 +7,7 @@ import SchulteImage from '/public/SchulteImage.webp'
 import MemoryFlip from '/public/MemoryFlip.png'
 import BulletMath from '/public/BulletMath.png'
 import SimonSaysImage from '/public/SimonSays.png'
+import WordLadderImage from '/public/WordLadder.svg'
 
 const SelectGame = () => {
   return (
@@ -60,7 +61,14 @@ const SelectGame = () => {
           link={'simon-says'}
           backgroundColor={'#9333EA'}
           textColor={'white'}
-        />      
+        />
+        <Card
+          image={WordLadderImage}
+          name={'Word Ladder'}
+          link={'word-ladder'}
+          backgroundColor={'#F97316'}
+          textColor={'white'}
+        />
       </div>
     </>
   )
