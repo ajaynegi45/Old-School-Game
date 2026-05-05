@@ -361,11 +361,13 @@ function getNeighbors(word: string, wordSet: ReadonlySet<string>): string[] {
  * BFS shortest-path finder.
  * Returns the full path [start, ..., target] or null if unreachable.
  * Both words must be uppercase.
+ * @param usedWords  Optional set of already-used uppercase words to exclude from the search.
  */
 export function bfs(
   start: string,
   target: string,
   wordSet: ReadonlySet<string>,
+  usedWords: ReadonlySet<string> = new Set(),
 ): string[] | null {
   // normalise to uppercase for the path output, lowercase for dict lookup
   const startUp = start.toUpperCase()
@@ -373,7 +375,8 @@ export function bfs(
   if (startUp === targetUp) return [startUp]
 
   const queue: Array<[string, string[]]> = [[startUp, [startUp]]]
-  const visited = new Set<string>([startUp])
+  // Seed visited with already-used words so BFS won't route through them
+  const visited = new Set<string>([startUp, ...usedWords])
 
   while (queue.length > 0) {
     const [current, path] = queue.shift()!
@@ -389,15 +392,18 @@ export function bfs(
 }
 
 /**
- * Returns the next word in the optimal BFS path from `current` to `target`.
+ * Returns the next word in the optimal BFS path from `current` to `target`,
+ * avoiding any words already in the player's chain.
  * Returns null if no path exists.
  */
 export function getHint(
   current: string,
   target: string,
+  usedWords: readonly string[] = [],
 ): string | null {
   const wordSet = getWordSet(current.length)
-  const path = bfs(current.toUpperCase(), target.toUpperCase(), wordSet)
+  const usedSet = new Set(usedWords.map((w) => w.toUpperCase()))
+  const path = bfs(current.toUpperCase(), target.toUpperCase(), wordSet, usedSet)
   if (!path || path.length < 2) return null
   return path[1]
 }

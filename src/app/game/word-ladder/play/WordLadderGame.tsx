@@ -170,7 +170,8 @@ export default function WordLadderGame() {
 
   const handleHint = () => {
     if (!puzzle || status !== 'playing') return
-    const next = getHint(currentWord, puzzle.target)
+    // Pass the full chain so BFS avoids already-used words
+    const next = getHint(currentWord, puzzle.target, chain)
     if (next) {
       setHint(next)
       setHintsUsed((h: number) => h + 1)

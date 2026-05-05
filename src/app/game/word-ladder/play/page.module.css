@@ -266,6 +266,8 @@
   border-radius: 12px;
   background: transparent;
   transition: background 0.2s;
+  flex-wrap: wrap;        /* prevent overflow on narrow screens */
+  min-width: 0;           /* allow children to shrink */
 }
 
 .chainStart {
@@ -602,5 +604,15 @@
 
   .wordInput {
     width: 130px;
+  }
+
+  /* Hide non-critical labels on very small screens to prevent chain overflow */
+  .startBadge {
+    display: none;
+  }
+
+  .chainIndex {
+    width: 18px;
+    font-size: 0.68rem;
   }
 }
