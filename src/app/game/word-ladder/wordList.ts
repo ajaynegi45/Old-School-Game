@@ -256,7 +256,7 @@ export const PUZZLES_MEDIUM: readonly PuzzlePair[] = [
   // RING→RINK→SINK→SING→SONG
   { start: 'RING', target: 'SONG', maxSteps: 9 },
   // MINE→MANE→LANE→LAND→BAND→BOND→BOLD→GOLD
-  { start: 'MINE', target: 'GOLD', maxSteps: 10 },
+  { start: 'MINE', target: 'GOLD', maxSteps: 9 },
   // MADE→MAKE→LAKE→LIKE→BIKE→BITE
   { start: 'MADE', target: 'BITE', maxSteps: 9 },
   // DARK→DARE→DINE→FINE→WINE→WINE
@@ -276,10 +276,9 @@ export const PUZZLES_HARD: readonly PuzzlePair[] = [
   { start: 'DRIVE', target: 'PROVE', maxSteps: 8 },
   // BRAVE→GRAVE→GRAPE→GRAZE
   { start: 'BRAVE', target: 'GRAZE', maxSteps: 8 },
-  // SHORE→STORE→STARE→STARK→STARK
+  // SHORE→STORE→STARE→STARK
   { start: 'SHORE', target: 'STARK', maxSteps: 8 },
-  // BLACK→SLACK→SLICK→STICK→STOCK→STORK? Hmm let me use a safer one
-  // STAND→BRAND→BRAID→BRAIN
+  // STAND→BLAND→BRAND→BRAID→BRAIN
   { start: 'STAND', target: 'BRAIN', maxSteps: 8 },
 ]
 
@@ -324,14 +323,16 @@ export function isValidWord(word: string): boolean {
 
 /**
  * Returns true when:
- *  1. `to` differs from `from` by exactly one letter
- *  2. `to` is a valid dictionary word
+ *  1. `to` has the same length as `from`
+ *  2. `to` differs from `from` by exactly one letter
+ *  3. `to` is a valid dictionary word
+ *
+ * Delegates the dictionary check to isValidWord so casing is always consistent.
  */
 export function isValidStep(from: string, to: string): boolean {
   if (from.length !== to.length) return false
-  const toUp = to.toUpperCase()
-  if (diffCount(from.toUpperCase(), toUp) !== 1) return false
-  return getWordSet(toUp.length).has(toUp)
+  if (diffCount(from.toUpperCase(), to.toUpperCase()) !== 1) return false
+  return isValidWord(to)
 }
 
 // ---------------------------------------------------------------------------
