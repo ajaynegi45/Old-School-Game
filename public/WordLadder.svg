@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <!-- Background circle -->
+  <circle cx="100" cy="100" r="96" fill="#F97316" />
+
+  <!-- Ladder rungs -->
+  <rect x="52" y="44" width="96" height="12" rx="6" fill="white" opacity="0.9"/>
+  <rect x="52" y="72" width="96" height="12" rx="6" fill="white" opacity="0.9"/>
+  <rect x="52" y="100" width="96" height="12" rx="6" fill="white" opacity="0.9"/>
+  <rect x="52" y="128" width="96" height="12" rx="6" fill="white" opacity="0.9"/>
+  <rect x="52" y="156" width="96" height="12" rx="6" fill="white" opacity="0.9"/>
+
+  <!-- Ladder side rails -->
+  <rect x="52" y="44" width="10" height="124" rx="5" fill="white" opacity="0.6"/>
+  <rect x="138" y="44" width="10" height="124" rx="5" fill="white" opacity="0.6"/>
+
+  <!-- Letters A → Z on two rungs -->
+  <text x="80" y="56" text-anchor="middle" font-family="monospace" font-weight="bold" font-size="14" fill="#F97316">A</text>
+  <text x="122" y="84" text-anchor="middle" font-family="monospace" font-weight="bold" font-size="14" fill="#F97316">Z</text>
+  <text x="100" y="113" text-anchor="middle" font-family="monospace" font-weight="bold" font-size="11" fill="#F97316">W→L</text>
+</svg>
