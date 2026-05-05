@@ -57,10 +57,19 @@ const MAX_LIVES: Record<Difficulty, number> = {
 // Component
 // ---------------------------------------------------------------------------
 
+const VALID_DIFFICULTIES: readonly Difficulty[] = ['easy', 'medium', 'hard']
+
+function parseDifficulty(value: string | null): Difficulty {
+  if (value && (VALID_DIFFICULTIES as string[]).includes(value)) {
+    return value as Difficulty
+  }
+  return 'medium'
+}
+
 export default function WordLadderGame() {
   const router = useRouter()
   const searchParams = useSearchParams()
-  const difficulty = (searchParams.get('difficulty') ?? 'medium') as Difficulty
+  const difficulty = parseDifficulty(searchParams.get('difficulty'))
 
   const [puzzle, setPuzzle] = useState<PuzzlePair | null>(null)
   const [chain, setChain] = useState<string[]>([])
