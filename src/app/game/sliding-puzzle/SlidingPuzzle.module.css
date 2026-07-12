@@ -1,0 +1,110 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+  min-height: 100vh;
+  font-family: system-ui, sans-serif;
+}
+
+.container h1 {
+  margin-bottom: 0.5rem;
+}
+
+.sizeSelector {
+  display: flex;
+  gap: 8px;
+  margin: 1rem 0;
+}
+
+.sizeButton {
+  padding: 10px 20px;
+  min-height: 44px;
+  font-size: 1rem;
+  font-weight: bold;
+  border: 2px solid #2c3e50;
+  border-radius: 6px;
+  background-color: white;
+  color: #2c3e50;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.sizeButton:hover {
+  background-color: #ecf0f1;
+}
+
+.activeSize {
+  background-color: #2c3e50;
+  color: white;
+}
+
+.activeSize:hover {
+  background-color: #34495e;
+}
+
+.moves {
+  font-size: 1.1rem;
+  color: #555;
+}
+
+.grid {
+  display: grid;
+  gap: 6px;
+  margin: 1.5rem 0;
+  background-color: #2c3e50;
+  padding: 10px;
+  border-radius: 12px;
+  width: min(440px, calc(100vw - 40px));
+  box-sizing: border-box;
+}
+
+.tile {
+  aspect-ratio: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: clamp(0.9rem, 3.5vw, 1.5rem);
+  font-weight: bold;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  user-select: none;
+  transition: transform 0.15s ease, background-color 0.2s;
+}
+
+.tile:hover:not(.empty) {
+  background-color: #2980b9;
+  transform: scale(1.05);
+}
+
+.empty {
+  background-color: transparent;
+  cursor: default;
+  pointer-events: none;
+}
+
+.resetButton {
+  padding: 12px 24px;
+  font-size: 1.1rem;
+  background-color: #2c3e50;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.resetButton:hover {
+  background-color: #34495e;
+}
+
+.winMessage {
+  color: #27ae60;
+  font-weight: bold;
+  font-size: 1.3rem;
+  margin: 0.5rem 0;
+}
